@@ -1,0 +1,717 @@
+:root {
+    --dark-text: #402E25; /* Dark text for readability */
+    --honey-yellow: #FFD44A; /* Softer honey yellow */
+    --light-honey: #fffbee; /* Light honey color */
+    --golden-border: #d4a017; /* Golden honey border */
+    --muted-honey: #a67c00; /* Muted honey for links */
+    --hover-honey: #ffeb99; /* Intermediate color between light-honey and honey-yellow */
+}
+
+/*Esquema de colores utilizado:
+- Color mas oscuro para header, footer y tarjetas: #FFD44A (amarillo miel más suave)
+- Color de fondo para la pagina: #fffbee (color miel claro)
+- Color de texto para la pagina: #402E25 (texto marron oscuro para legibilidad)
+- Color de borde para la pagina: #d4a017 (borde dorado miel)
+- Color de enlace para la pagina: #a67c00 (color miel atenuado para enlaces)
+*/
+
+
+
+/* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--light-honey);
+    color: var(--dark-text);
+}
+
+/* Estilos de la Hero Section (texto principal de la home page) */
+.hero {
+    text-align: center;
+    padding: 2rem;
+    border-bottom: 1px solid var(--golden-border);
+    background-color: var(--light-honey);
+    color: var(--dark-text);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+/* Estilos de las tarjetas en la home page */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+.card {
+    border: 1px solid var(--golden-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--honey-yellow);
+    color: var(--dark-text);
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit; /* Hacer que el color herede del elemento padre */
+    display: block;
+}
+
+h1, h2 {
+    margin: 0.5rem 0;
+    color: var(--dark-text);
+}
+
+p {
+    margin: 0.5rem 0;
+    color: var(--dark-text);
+}
+
+/* Estilos header */
+header {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--honey-yellow);
+    color: var(--dark-text);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--golden-border); 
+}
+
+/* Forzar al header a a no ser redondeado (daba problemas en algunos navegadores como microsoft edge) */
+header, footer {
+    border-radius: 0 !important;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilos barra de navegacion */
+header a {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--muted-honey);
+}
+
+.hero-logo {
+    max-width: 300px;
+    max-height: 300px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 1rem auto;
+    display: block;
+}
+
+.header-logo {
+    flex: 1;
+    margin: 0;
+    display: inline-block;
+}
+
+.header-nav {
+    flex: 2;
+    display: flex;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.header-nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: space-around;
+}
+
+.header-nav-list a {
+    color: var(--dark-text);
+    font-size: 1rem;
+    white-space: nowrap; /* Prevenir el texto de usar mas de una linea */
+}
+
+/* Estilos footer */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--honey-yellow);
+    color: var(--dark-text);
+    border-top: 1px solid var(--golden-border);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--dark-text);
+}
+
+/* Estilos logout */
+
+.logout-form {
+    display: inline;
+    margin-bottom: 2rem; /* Add margin to prevent footer overlap */
+}
+
+.logout-form button {
+    all: unset;
+    text-decoration: none; /* Match other menu items */
+    font-weight: bold; /* Match font weight */
+    color: var(--dark-text); /* Match text color */
+    cursor: pointer;
+}
+
+.logout-form button:hover {
+    text-decoration: underline; /* Add hover effect to match links */
+}
+
+/* Agrandar el tamaño del menu hamburguesa */
+.burger-menu {
+    font-size: 2rem;
+}
+
+/* Posicionar el menu hamburguesa */
+.burger-menu {
+    position: fixed;
+    right: 6%;
+}
+
+/* Asegurarse de que el icono hamburguesa solo es visible en móvil */
+.burger-menu {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .burger-menu {
+        display: block;
+    }
+}
+
+/* Retoques para hacer la pagina responsiva tablet view */
+@media (max-width: 768px) {
+    .hero {
+        padding: 1rem;
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+/* Estilos responsivos para el header tablet view */
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 5px;
+    }
+
+    .header-logo {
+        margin-bottom: 10px;
+    }
+
+    .header-nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+/* Ajustes adicionales para vista móvil */
+@media (max-width: 480px) {
+    .hero {
+        padding: 0.5rem;
+    }
+
+    .container {
+        padding: 0.25rem;
+    }
+
+    .card {
+        padding: 0.75rem;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .header {
+        padding: 3px;
+    }
+
+    .header-logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .header-nav-list {
+        gap: 3px;
+    }
+
+    .user-page {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .user-info,
+    .user-events-venues {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .user-info img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .user-details table,
+    .user-events-venues table {
+        width: 100%;
+    }
+}
+
+/* Ajustar el tamaño del menu para la vista de tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+    .header-nav-list a {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+}
+
+/* Asegurar la alineacion del header y el menu en la vista tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center; 
+    }
+
+    .header-nav {
+        flex-direction: row;
+        justify-content: flex-end; 
+        align-items: center; 
+    }
+
+    .header-nav-list {
+        gap: 20px;
+    }
+}
+
+/* Asegurar la alineacion del navbar a la derecha en vista tablet y PC */
+.header-nav {
+    justify-content: flex-end; 
+    margin-right: 0;
+    gap: 20px;
+}
+
+/* Ajustar el espaciado del navbar para vistas de tablet y PC */
+.header-nav-list {
+    padding: 10px 20px; 
+    gap: 30px; 
+}
+
+/* Asegurar que el navbar es visible en vistas de tablet y PC */
+.header-nav {
+    display: flex;
+    max-height: none;
+    opacity: 1;
+}
+
+/* Asegurar que el navbar esta oculto por defecto en vista movil */
+@media (max-width: 480px) {
+    .header-nav {
+        display: none; 
+    }
+
+    .header-nav.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+/* Alinear el navbar mas a la derecha e incrementar el espaciado */
+.header-nav-list {
+    padding-right: 5%;
+    gap: 40px; 
+}
+
+/* Estilos para la pagina de eventos */
+.events-page {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.events-page h1 {
+    font-size: 2rem;
+    color: var(--dark-text); 
+    margin-bottom: 1.5rem;
+}
+
+/* Ajuste de estilos de paginacion */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.pagination .page-item {
+    display: inline-block;
+    border: 1px solid var(--golden-border);
+    border-radius: 4px;
+    background-color: var(--light-honey); 
+    color: var(--dark-text);
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+}
+
+.pagination .page-item.active {
+    background-color: var(--golden-border);
+    color: #fff; 
+}
+
+.pagination .page-item.disabled {
+    background-color: var(--light-honey); 
+    color: #999;
+    cursor: not-allowed;
+}
+
+.pagination .page-item:hover:not(.disabled):not(.active) {
+    background-color: var(--hover-honey); /* Use the intermediate hover color */
+    color: var(--dark-text); /* Ensure text remains readable */
+}
+
+/* Ajuste de estilos activos y hover para los enlaces de paginacion */
+.pagination a {
+    text-decoration: none;
+    color: #666; 
+}
+
+.pagination a:hover {
+    color: var(--dark-text); 
+}
+
+/* Asegurar que la navegacion del header se mantiene en el lado derecho para tablet y PC */
+@media (min-width: 768px) {
+    .header-nav {
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: flex-end;
+        /*margin-right: 0.5rem;  */
+    }
+}
+
+/* Estilos adicionales para las tablas */
+table {
+    margin: 0 auto; /* Center the table horizontally */
+    border-collapse: collapse; /* Remove gaps between table cells */
+    width: 90%; /* Adjust width to fit nicely within the page */
+    border: 1px solid #ddd; /* Add a subtle border */
+}
+
+table th, table td {
+    padding: 12px; /* Add padding for better readability */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #ddd; /* Add a border below rows */
+}
+
+table th {
+    background-color: var(--table-header-bg, var(--golden-border)) !important; /* Force application */
+}
+
+table tr:hover:not(:has(th)) {
+    background-color: var(--hover-honey); /* Use the intermediate hover color */
+}
+
+table a {
+    color: inherit; /* Match the text color of the menu */
+    text-decoration: none; /* Remove underline from links */
+}
+
+table a:hover {
+    text-decoration: underline; /* Keep underline for clarity */
+    color: #555; /* Change hover color to a neutral gray */
+}
+
+/* Estilos para el boton 'Volver a la lista' */
+.back-to-list {
+    display: inline-block;
+    border: 1px solid var(--golden-border);
+    border-radius: 4px;
+    background-color: var(--light-honey);
+    color: var(--dark-text);
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.back-to-list:hover {
+    background-color: var(--hover-honey);
+    color: var(--dark-text);
+}
+
+/* Media query para vista movil - ocultar columnas innecesarias en la tabla de eventos */
+@media (max-width: 480px) {
+    .events-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .events-table th:nth-child(n+3),
+    .events-table td:nth-child(n+3) {
+        display: none; /* Hide columns beyond name and dates */
+    }
+
+    .events-table th,
+    .events-table td {
+        border: 1px solid var(--golden-border);
+        padding: 0.75rem;
+        text-align: center;
+    }
+}
+
+/* Media query para vista movil - ocultar columnas innecesarias en la tabla de venues */
+@media (max-width: 480px) {
+    .venues-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .venues-table th:nth-child(n+3),
+    .venues-table td:nth-child(n+3) {
+        display: none; /* Hide columns beyond name and city */
+    }
+
+    .venues-table th,
+    .venues-table td {
+        border: 1px solid #ddd; /* Use gray border color */
+        padding: 0.75rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 481px) {
+    .burger-menu {
+        display: none !important; /* Force hiding burger menu in PC view */
+    }
+}
+
+/* Asegurar que las tablas de eventos tambien usan el color de borde gris */
+.events-table th,
+.events-table td {
+    border: 1px solid #ddd; /* Use gray border color */
+}
+
+/* Estilos para el boton de modo oscuro */
+.dark-mode-button {
+        background-color: var(--honey-yellow);
+        color: var(--dark-text);
+        border: 1px solid var(--golden-border);
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+    }
+
+    .dark-mode-button:hover {
+        background-color: var(--hover-honey);
+        color: var(--dark-text);
+    }
+
+/* User Page Styles */
+.user-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    align-items: start;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 2rem; /* Add margin to the first portion to prevent footer overlap */
+}
+
+.user-info img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.user-details {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.user-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.user-details th, .user-details td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.user-details th {
+    background-color: #f9f9f9;
+}
+
+.change-pfp-form {
+    margin-top: 1.5rem;
+}
+
+/* Ensure text and table have consistent margins */
+.user-events-venues h2 {
+    margin-top: 1rem;
+    margin-left: 12px;
+}
+
+.user-events-venues table {
+    margin-left: 12px;
+}
+
+/* Updated class for venue images to make them square */
+.venue-carousel-image {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border-radius: 0; /* Remove rounded corners */
+}
+
+/* Ensure primary image is square with higher specificity */
+.primary-image {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    margin-bottom: 1rem !important;
+    border-radius: 0 !important; /* Ensure square shape */
+}
+
+/* Redesigned styles for venue details with responsive adjustments */
+.venue-details {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    margin: 2% auto;
+    max-width: 90%;
+}
+
+.venue-image {
+    flex: 2;
+    text-align: center;
+    max-width: 100%;
+}
+
+.venue-info {
+    flex: 2;
+    background-color: var(--light-honey);
+    padding: 2%;
+    border: 1px solid var(--golden-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.venue-info h1 {
+    font-size: 2rem;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+}
+
+.venue-info p {
+    font-size: 1.2rem;
+    color: var(--dark-text);
+    margin-bottom: 1.5rem;
+}
+
+.venue-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.venue-table th, .venue-table td {
+    border: 1px solid var(--golden-border);
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.venue-table th {
+    background-color: var(--hover-honey);
+    color: var(--dark-text);
+}
+
+.venue-actions {
+    text-align: center;
+    margin-top: 2%;
+}
+
+.venue-actions a {
+    display: inline-block;
+    margin: 0 1%;
+    padding: 0.75% 1.5%;
+    background-color: var(--honey-yellow);
+    color: var(--dark-text);
+    text-decoration: none;
+    border: 1px solid var(--golden-border);
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.venue-actions a:hover {
+    background-color: var(--hover-honey);
+    color: var(--dark-text);
+}
