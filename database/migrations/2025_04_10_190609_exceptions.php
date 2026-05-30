@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de excepciones sobre la disponibilidad regular de cada local.
         Schema::create('availability_exceptions', function (Blueprint $table) {
             $table->id('exception_id');
             $table->foreignId('venue_id')->constrained('venues', 'venue_id');
-            $table->date('exception_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
             $table->boolean('is_available')->default(false);
             $table->string('reason', 255)->nullable();
-            
-            $table->unique(['venue_id', 'exception_date']);
+
+            // Indice para consultas por local y rango de fechas.
+            $table->index(['venue_id', 'start_date', 'end_date'], 'idx_availability_exceptions_range');
         });
     }
 
@@ -29,6 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exceptions');
+        // Elimina la tabla de excepciones de disponibilidad.
+        Schema::dropIfExists('availability_exceptions');
     }
 };

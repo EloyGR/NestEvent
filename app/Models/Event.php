@@ -29,6 +29,9 @@ class Event extends Model
         'is_public' => 'boolean',
     ];
 
+    /**
+     * Relacion con el usuario organizador del evento.
+     */
     public function organizer()
     {
         return $this->belongsTo(User::class, 'organizer_id', 'user_id');

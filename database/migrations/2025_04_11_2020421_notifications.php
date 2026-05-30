@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de notificaciones internas por usuario.
         Schema::create('notifications', function (Blueprint $table) {
             $table->id('notification_id');
             $table->foreignId('user_id')->constrained('users', 'user_id');
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->enum('related_entity_type', ['event', 'venue', 'booking', 'user'])->nullable();
             $table->unsignedBigInteger('related_entity_id')->nullable();
             $table->timestamp('created_at')->useCurrent();
-            
+            // Indice para lectura rapida de no leidas por usuario.
             $table->index(['user_id', 'is_read']);
         });
     }
@@ -31,6 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Elimina la tabla de notificaciones.
         Schema::dropIfExists('notifications');
     }
 };

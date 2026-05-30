@@ -33,6 +33,9 @@ class User extends Authenticatable
         'is_active' => 'boolean',
     ];
 
+    /**
+     * Valida y asigna el tipo de usuario permitido.
+     */
     public function setUserTypeAttribute($value)
     {
         $allowedTypes = ['admin', 'event_manager', 'local_manager', 'user'];
@@ -44,11 +47,17 @@ class User extends Authenticatable
         $this->attributes['user_type'] = $value;
     }
 
+    /**
+     * Relacion con los eventos organizados por el usuario.
+     */
     public function organizedEvents()
     {
         return $this->hasMany(Event::class, 'organizer_id', 'user_id');
     }
 
+    /**
+     * Relacion con los locales gestionados por el usuario.
+     */
     public function managedVenues()
     {
         return $this->hasMany(Venue::class, 'manager_id', 'user_id');

@@ -1,0 +1,43 @@
+:root {
+    --dark-text: #402E25;
+    --honey-yellow: #FFD44A;
+    --light-honey: #fffbee;
+    --golden-border: #d4a017;
+    --muted-honey: #a67c00;
+    --link-hover-color: var(--dark-text);
+    --hover-honey: #ffeb99;
+    --table-header-bg: #FFD44A;
+    --form-control-bg: #ffffff;
+    --form-control-text: var(--dark-text);
+    --form-control-placeholder: #8a7a70;
+    color-scheme: light;
+}
+
+.dark {
+    --dark-text: #f7f3eb;
+    --honey-yellow: #2b2b2b;
+    --light-honey: #1f1f1f;
+    --golden-border: #5b5b5b;
+    --muted-honey: #ffd44a;
+    --link-hover-color: #ffffff;
+    --hover-honey: #3a3a3a;
+    --table-header-bg: #3a3a3a;
+    --form-control-bg: #2a2a2a;
+    --form-control-text: #f7f3eb;
+    --form-control-placeholder: #b9b9b9;
+    color-scheme: dark;
+}
+
+@theme {
+    --color-brand-text: var(--dark-text);
+    --color-brand-surface: var(--honey-yellow);
+    --color-brand-bg: var(--light-honey);
+    --color-brand-border: var(--golden-border);
+    --color-brand-link: var(--muted-honey);
+    --color-brand-link-hover: var(--link-hover-color);
+    --color-brand-hover: var(--hover-honey);
+    --color-brand-table-header: var(--table-header-bg);
+    --color-brand-form-bg: var(--form-control-bg);
+    --color-brand-form-text: var(--form-control-text);
+    --color-brand-form-placeholder: var(--form-control-placeholder);
+}

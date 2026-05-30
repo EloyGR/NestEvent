@@ -1,11 +1,106 @@
-/* @import 'tailwindcss';
+@import "tailwindcss";
+@import "./theme.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
-@source '../**//*.blade.php';
-@source '../**//*.js';
+@source '../**/*.blade.php';
+@source '../**/*.js';
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
-} */
+}
+
+@layer components {
+    /* Harmonize legacy white surfaces in dark mode without touching form controls. */
+    .dark :where(.bg-white):not(input):not(textarea):not(select):not(option) {
+        background-color: var(--light-honey) !important;
+    }
+
+    /* Normalize legacy hardcoded black text classes under dark mode. */
+    .dark .text-black,
+    .dark .text-black\/80,
+    .dark .text-black\/70,
+    .dark .text-black\/60 {
+        color: var(--dark-text) !important;
+    }
+
+    /* Keep legacy bg-white form controls readable using centralized theme tokens. */
+    .dark input.bg-white,
+    .dark textarea.bg-white,
+    .dark select.bg-white {
+        background-color: var(--form-control-bg) !important;
+        color: var(--form-control-text) !important;
+        caret-color: var(--form-control-text);
+        -webkit-text-fill-color: var(--form-control-text);
+    }
+
+    .dark input.bg-white::placeholder,
+    .dark textarea.bg-white::placeholder {
+        color: var(--form-control-placeholder);
+        opacity: 0.7;
+    }
+
+    .dark a.bg-white.text-brand-text,
+    .dark button.bg-white.text-brand-text {
+        color: var(--dark-text) !important;
+    }
+
+    /* Keep table listings readable with theme surfaces in dark mode. */
+    .dark tbody.bg-white {
+        background-color: var(--light-honey) !important;
+    }
+
+    .dark tbody.bg-white td,
+    .dark tbody.bg-white th,
+    .dark tbody.bg-white a,
+    .dark tbody.bg-white .text-brand-text {
+        color: var(--dark-text) !important;
+    }
+
+    /* Preserve contrast for dark action buttons inside white table bodies. */
+    .dark tbody.bg-white button.bg-brand-surface.text-brand-text,
+    .dark tbody.bg-white a.bg-brand-surface.text-brand-text {
+        color: var(--dark-text) !important;
+    }
+
+    .dark tbody.bg-white th.bg-brand-surface,
+    .dark tbody.bg-white th.bg-brand-surface.text-brand-text {
+        color: var(--dark-text) !important;
+    }
+
+    /* Keep extras checkboxes readable in both light and dark modes. */
+    .extras-checkbox {
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        margin-top: 0.125rem;
+        border: 1px solid var(--golden-border);
+        border-radius: 0.25rem;
+        background-color: #ffffff;
+        display: inline-grid;
+        place-content: center;
+        flex-shrink: 0;
+    }
+
+    .extras-checkbox::after {
+        content: "";
+        width: 0.55rem;
+        height: 0.55rem;
+        transform: scale(0);
+        transition: transform 120ms ease-in-out;
+        background-color: var(--form-control-text);
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0, 43% 62%);
+    }
+
+    .extras-checkbox:checked::after {
+        transform: scale(1);
+    }
+
+    .extras-checkbox:focus-visible {
+        outline: 2px solid var(--golden-border);
+        outline-offset: 2px;
+    }
+}

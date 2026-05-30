@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de locales gestionados por usuarios con rol manager.
         Schema::create('venues', function (Blueprint $table) {
             $table->id('venue_id');
             $table->string('name', 100);
             $table->text('description')->nullable();
-            $table->string('address', 255);
+            $table->string('address', 100);
             $table->string('city', 50);
             $table->string('state', 50)->nullable();
-            $table->string('zip_code', 20)->nullable();
+            $table->string('zip_code', 20);
             $table->string('country', 50);
             $table->integer('capacity');
             $table->decimal('price_per_hour', 10, 2)->nullable();
@@ -33,8 +34,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::disableForeignKeyConstraints(); // Deshabilita las restricciones de clave foránea
+        // Desactiva FK para permitir eliminar la tabla sin conflictos de referencia.
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('venues');
-        Schema::enableForeignKeyConstraints(); // Habilita las restricciones de clave foránea
+        Schema::enableForeignKeyConstraints();
     }
 };

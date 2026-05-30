@@ -31,7 +31,7 @@ class Venue extends Model
     ];
 
     /**
-     * Define the relationship with the User model (manager).
+     * Relacion con el usuario gestor del local.
      */
     public function manager()
     {
@@ -39,10 +39,19 @@ class Venue extends Model
     }
 
     /**
-     * Define the relationship with the VenueImage model.
+     * Relacion con las imagenes asociadas al local.
      */
     public function images()
     {
         return $this->hasMany(VenueImage::class, 'venue_id', 'venue_id');
+    }
+
+    /**
+     * Relacion muchos a muchos con extras del local.
+     */
+    public function extras()
+    {
+        return $this->belongsToMany(Extra::class, 'extra_venue', 'venue_id', 'extra_id', 'venue_id', 'extra_id')
+            ->withTimestamps();
     }
 }

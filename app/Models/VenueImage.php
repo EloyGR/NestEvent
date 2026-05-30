@@ -14,12 +14,12 @@ class VenueImage extends Model
     protected $fillable = [
         'venue_id',
         'image_url',
-        'is_primary',
+        'main_image',
         'upload_date',
     ];
 
     /**
-     * Define the relationship with the Venue model.
+     * Relacion con el local al que pertenece la imagen.
      */
     public function venue()
     {

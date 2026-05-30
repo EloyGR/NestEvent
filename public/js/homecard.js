@@ -1,3 +1,4 @@
+// Aplica efecto hover a tarjetas de portada para reforzar feedback visual.
 document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".card");
 

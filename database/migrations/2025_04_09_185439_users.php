@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla principal de usuarios del sistema.
         Schema::create('users', function (Blueprint $table) {
             $table->id('user_id');
             $table->string('username', 50)->unique();
@@ -32,6 +33,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Elimina la tabla de usuarios.
         Schema::dropIfExists('users');
     }
 };

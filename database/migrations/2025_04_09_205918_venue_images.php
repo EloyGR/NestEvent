@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de imagenes asociadas a cada local.
         Schema::create('venue_images', function (Blueprint $table) {
             $table->id('image_id');
             $table->foreignId('venue_id')->constrained('venues', 'venue_id');
             $table->string('image_url', 255);
-            $table->boolean('is_primary')->default(false);
+            $table->boolean('main_image')->default(false);
             $table->timestamp('upload_date')->useCurrent();
         });
     }
@@ -25,6 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Elimina la tabla de imagenes de locales.
         Schema::dropIfExists('venue_images');
     }
 };

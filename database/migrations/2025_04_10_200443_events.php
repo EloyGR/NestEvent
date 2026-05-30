@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de eventos creados por organizadores.
         Schema::create('events', function (Blueprint $table) {
             $table->id('event_id');
             $table->string('name', 100);
@@ -31,8 +32,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::disableForeignKeyConstraints(); // Deshabilita las restricciones de clave foránea
+        // Desactiva FK para permitir eliminar la tabla sin conflictos de referencia.
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('events');
-        Schema::enableForeignKeyConstraints(); // Habilita las restricciones de clave foránea
+        Schema::enableForeignKeyConstraints();
     }
 };
