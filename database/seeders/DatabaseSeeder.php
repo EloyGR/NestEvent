@@ -16,8 +16,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        // Desactiva temporalmente FK para truncar tablas en orden seguro.
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        // Desactiva temporalmente FK solo en MySQL para truncar tablas en orden seguro.
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         // Limpia tablas base para evitar conflictos de claves foraneas y residuos entre reseeds.
         $tablesToTruncate = [
@@ -40,8 +43,11 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // Reactiva FK antes de ejecutar el pipeline de seeders.
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        // Reactiva FK solo en MySQL antes de ejecutar el pipeline de seeders.
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
         // Ejecuta seeders en orden de dependencias entre tablas.
         $this->call([
