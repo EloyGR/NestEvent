@@ -24,9 +24,17 @@ class BookingSeeder extends Seeder
         ];
 
         // Obtiene usuarios y locales base para construir reservas de ejemplo.
+
+        // Genera un CASE para mantener el orden de los usernames en PostgreSQL
+        $orderCases = 'CASE';
+        foreach ($managerUsernames as $i => $username) {
+            $orderCases .= " WHEN username = '$username' THEN $i";
+        }
+        $orderCases .= ' END';
+
         $managers = User::query()
             ->whereIn('username', $managerUsernames)
-            ->orderByRaw("FIELD(username, 'ana.garcia', 'pedro.lopez', 'laura.sanchez', 'jorge.castillo', 'marta.vidal')")
+            ->orderByRaw($orderCases)
             ->get();
 
         $venues = Venue::query()
