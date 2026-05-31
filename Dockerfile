@@ -52,5 +52,9 @@ RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache \
 EXPOSE 80
 
 # Espera a que la base de datos esté disponible, luego ejecuta migraciones y arranca Apache
-# Espera a que la base de datos esté disponible, mostrando el error real de conexión, luego ejecuta migraciones y arranca Apache
-CMD bash -c 'until php -r "try { new PDO(\"pgsql:host=${DB_HOST};port=${DB_PORT};dbname=${DB_DATABASE}\", \"${DB_USERNAME}\", \"${DB_PASSWORD}\"); echo \"DB is up\\n\"; } catch (Exception $e) { echo \"Waiting for DB... Error: ".$e->getMessage()."\\n"; exit(1); }"; do sleep 3; done; php artisan migrate --force && apache2-foreground'
+# Copia el script de espera y dale permisos de ejecución
+COPY wait-for-db.sh /usr/local/bin/wait-for-db.sh
+RUN chmod +x /usr/local/bin/wait-for-db.sh
+
+# Usa el script antes de migrar y arrancar Apache
+CMD /usr/local/bin/wait-for-db.sh && php artisan migrate --force && apache2-foreground
