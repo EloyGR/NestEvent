@@ -27,8 +27,12 @@ WORKDIR /var/www/html
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+
 # Copy Laravel project files
 COPY . .
+
+# Copy the production environment file before any build steps
+RUN if [ -f .env.render ]; then cp .env.render .env; fi
 
 # Install PHP dependencies optimized for production
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
