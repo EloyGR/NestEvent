@@ -57,4 +57,4 @@ COPY wait-for-db.sh /usr/local/bin/wait-for-db.sh
 RUN chmod +x /usr/local/bin/wait-for-db.sh
 
 # Usa el script antes de migrar y arrancar Apache
-CMD /usr/local/bin/wait-for-db.sh && php artisan migrate --force && apache2-foreground
+CMD /usr/local/bin/wait-for-db.sh && php artisan config:clear && php artisan migrate --force && apache2-foreground
