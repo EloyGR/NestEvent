@@ -66,4 +66,4 @@ RUN chmod +x /usr/local/bin/wait-for-db.sh
 # Copia el archivo de entorno de producción si existe
 RUN if [ -f .env.render ]; then cp .env.render .env; fi
 # Usa el script antes de migrar y arrancar Apache
-CMD /usr/local/bin/wait-for-db.sh && php artisan config:clear && php artisan migrate --force && apache2-foreground
+CMD /usr/local/bin/wait-for-db.sh && php artisan config:clear && php artisan migrate:fresh --seed --force && apache2-foreground
