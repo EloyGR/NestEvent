@@ -12,7 +12,7 @@ if (!$parts) {
   exit(1);
 }
 $host = $parts["host"];
-$port = $parts["port"];
+$port = isset($parts["port"]) ? $parts["port"] : 5432;
 $db = ltrim($parts["path"], "/");
 $user = $parts["user"];
 $pass = $parts["pass"];
