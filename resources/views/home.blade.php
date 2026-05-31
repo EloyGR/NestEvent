@@ -67,3 +67,5 @@
     {{-- Script de interacción visual para tarjetas de portada. --}}
     <script src="/js/homecard.js"></script>
 @endsection
+
+<script>console.log('APP_URL:', '{{ env('APP_URL') }}');</script>
