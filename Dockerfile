@@ -51,5 +51,5 @@ RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache \
 # Expose Apache port
 EXPOSE 80
 
-# Start Apache server
-CMD ["apache2-foreground"]
+# Start Apache server y ejecuta migraciones antes
+CMD php artisan migrate --force && apache2-foreground
