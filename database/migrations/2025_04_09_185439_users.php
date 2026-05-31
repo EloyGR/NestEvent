@@ -22,8 +22,7 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
             $table->string('profile_picture', 255)->nullable();
             $table->string('user_type', 20);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamps();
             $table->boolean('is_active')->default(true);
         });
     }
