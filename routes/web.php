@@ -28,7 +28,7 @@ Route::post('/login', [AuthController::class, 'login']);
 // Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/events', [EventController::class, 'index'])->middleware('auth')->name('events.index');
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/create', [EventController::class, 'create'])->middleware('auth')->name('events.create');
 Route::get('/events/my-events', [EventController::class, 'myEvents'])->middleware('auth')->name('events.myEvents');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
