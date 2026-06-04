@@ -646,16 +646,33 @@ class VenueController extends Controller
                 ->with('error', 'No puedes eliminar un local con reservas asociadas.');
         }
 
-        foreach ($venue->images as $image) {
-            Storage::disk('public')->delete('venue_images/' . $image->image_url);
-        }
+        // Se guardan rutas para borrar archivos solo cuando la eliminacion en BD haya finalizado.
+        $imagePaths = $venue->images
+            ->pluck('image_url')
+            ->filter()
+            ->map(fn (string $imageUrl) => 'venue_images/' . $imageUrl)
+            ->values()
+            ->all();
 
         $venueName = $venue->name;
         $venueId = (int) $venue->venue_id;
         $actor = auth()->user()?->username ?? 'Sistema';
 
-        DB::table('venue_images')->where('venue_id', $venue->venue_id)->delete();
-        $venue->delete();
+        DB::transaction(function () use ($venue) {
+            // Tablas sin cascadeOnDelete: se limpian manualmente antes de borrar el local.
+            DB::table('availability_exceptions')->where('venue_id', $venue->venue_id)->delete();
+            DB::table('venue_availability')->where('venue_id', $venue->venue_id)->delete();
+            DB::table('venue_images')->where('venue_id', $venue->venue_id)->delete();
+
+            // Defensivo: extra_venue ya tiene cascade, pero detach evita depender del motor.
+            $venue->extras()->detach();
+
+            $venue->delete();
+        });
+
+        if (! empty($imagePaths)) {
+            Storage::disk('public')->delete($imagePaths);
+        }
 
         $this->notifyAdminsAboutVenueAction(
             'Local eliminado',
